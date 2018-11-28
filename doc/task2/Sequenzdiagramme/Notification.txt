@@ -1,0 +1,19 @@
+title Erinnerungs Sequence
+":Timer"->>+":Tasklist": checkOverdueElements()
+
+":Tasklist" -> +*"OverdueElements:List<Task>" : <<createList>>
+"OverdueElements:List<Task>" --> -":Tasklist":
+loop foreach Task
+    ":Tasklist" -> +"Tasks:List<Task>":get(index)
+    "Tasks:List<Task>" --> -":Tasklist":Task
+    ":Tasklist" ->+":Task": isOverdue()
+    ":Task" -->-":Tasklist": boolean
+    opt Task is overdue
+        ":Tasklist" ->+"OverdueElements:List<Task>": add(Task)
+        "OverdueElements:List<Task>" -->-":Tasklist" : 
+    end
+end
+":Tasklist" -> +":TaskListPresenter": ...
+":TaskListPresenter" -> +":TaskListView": ... 
+":TaskListView" --> -":TaskListPresenter":
+":TaskListPresenter" --> - ":Tasklist": 

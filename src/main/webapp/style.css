@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+
+#background{
+	background-color: #1A5276;
+}
+
+body {
+	background-color: #1A5276;
+	width: inherit;
+}
+
+#contentFrame{
+	padding: 1em 1em 5em;
+}
+
+#footer {
+	bottom:0;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	width: inherit;
+}
+
+#mainFrame{
+	background-color: Gainsboro;max-width: 600px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 95vh;
+	position: relative;
+}
+
+#subTitle {
+	color: DarkBlue;
+	margin:0px;
+}
+
+#text {
+	color: mediumBlue;
+}
+
+#title{
+	color: DarkBlue;
+	font-weight: bold;
+}

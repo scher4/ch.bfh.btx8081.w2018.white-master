@@ -1,0 +1,31 @@
+title Sequenzdiagramm Tagebucheintrag
+
+Event ->> +":NewEntryView":
+":NewEntryView"->+":NewEntryPresenter": clickButton(command:String)
+
+":NewEntryPresenter"-> +":Diary": createEntry(title:String, ...)
+
+":Diary" -> +*":Entry": <<createEntry>>
+":Entry" -> +*"attachements:List<Task>": <<createList>>
+"attachements:List<Task>" --> -":Entry":
+":Entry" --> -":Diary":
+":Diary" -> +":Diary": addEntry(Entry)
+":Diary" --> -":Diary": 
+
+
+
+    
+    
+    
+loop 0..*
+   ":Diary" -> +*":Attachement": <<createAttachement>>
+   ":Attachement" --> -":Diary":
+   ":Diary" -> +":Entry": addAttachment(Attachement)
+   ":Entry" -> +"attachements:List<Task>": add(Attachment*)
+   "attachements:List<Task>" --> -":Entry":
+   ":Entry" --> -":Diary":
+
+end
+
+    ":Diary" --> -":NewEntryPresenter":
+    ":NewEntryPresenter" --> -":NewEntryView":

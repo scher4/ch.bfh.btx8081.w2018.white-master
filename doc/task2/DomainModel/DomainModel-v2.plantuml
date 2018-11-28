@@ -1,0 +1,75 @@
+@startuml
+title Domain Model (updated v2)
+caption 20. November 2018
+'set monochrome style'
+skinparam monochrome true
+'possibilty to display handwritten style. Change to true'
+skinparam handwritten false
+' remove shadows'
+skinparam shadowing false
+
+'Set relationship between classes'
+'relationship is set after the colon :'
+'User "1" -- "1" TimeLine : has
+User "1" -- "1" Diary : has
+User "1" -- "1" TaskList : has
+
+Diary "1" *-- "0..*" Entry : consists of
+
+Entry "1" -- "0..*" Attachment : can have\nattached
+Entry "0..1" -- "0..*" Comment : has
+
+'TimeLine "1" -- "0..*" Task : shows
+'TimeLine "1" -- "0..*" Entry : shows
+
+TaskList "1" *-- "0..*" Task : consists of
+Task "1" -- "0..*" Task : can have \nSubtasks
+Task "0..1" -- "0..*" Comment : has
+
+'define attributes of classes'
+class User {
+  - username
+  - name
+  - password
+  - birthdate
+}
+
+class Entry {
+  - title
+  - toDate
+  - fromDate
+  - description
+  - mood
+  - discussWithDoctor
+}
+
+class Task {
+  - title
+  - description
+  - dueDate
+  - status
+  - closeDate
+}
+
+class Comment {
+  - date
+  - text
+}
+' add a note for better comprehensability. must stay under class Comment{}'
+note bottom: A Comment can belong either to an Entry or to a Task
+
+class Attachment {
+  - title
+  - content
+}
+
+'hide symbols'
+hide class circle
+'hide non-used attributes'
+hide class Diary members
+'hide class TimeLine members
+hide class TaskList members
+
+'if set to false, every class except for the above shows attributes'
+hide members 'false
+@enduml
